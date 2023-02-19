@@ -1,0 +1,42 @@
+name: Workflow to create a db running inside a docker container on a remote host
+
+# Controls when the workflow will run
+on:
+
+#  pull_request:
+#    branches: [ "main" ]
+#    types: [opened, synchronize , closed]
+    
+  workflow_dispatch:
+
+env:
+  staging_folder: staging #Must be consistent with folder used in Dockrfile
+  
+jobs:
+  push-create-db-assets-to-remote-job:
+    runs-on: ubuntu-22.04
+
+      
+    steps:
+      # Checkout the repository this workflow belongs to using a ready made global action called checkout
+      # The repository name is in an env variable called $GITHUB_WORKSPACE which this action uses 
+      - uses: actions/checkout@v3
+        
+        
+      - name: Make staging directory
+        run: mkdir ./${{ env.staging_folder }}
+        env:
+          repo_root_path: $GITHUB_WORKSPACE
+        
+      - name: Copy data to be transferred to staging
+        run: cp -r $repo_root_path/actions/create-db-image/assets/ ./${{ env.staging_folder }}
+      
+      #  Check out the sftp-folder-to-remote action
+      - uses: mp30028/wf-actions/actions/sftp-folder-to-remote@main
+        with:
+          remote_username: ${{ secrets.REMOTE_USERNAME  }}
+          remote_host: ${{ secrets.REMOTE_SERVER  }}
+          remote_port: ${{ secrets.REMOTE_PORT  }}
+          remote_ssh_key: ${{ secrets.REMOTE_SSH_KEY  }}
+          local_filepath: ./${{ env.staging_folder }} 
+          remote_filepath: ${{ vars.REMOTE_FILEPATH  }}          
