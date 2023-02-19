@@ -62,7 +62,7 @@ CREATE USER addrbkuser@% IDENTIFIED BY 'addr3ssb00k';
 ALTER USER addrbkuser@% IDENTIFIED WITH mysql_native_password BY 'addr3ssb00k';
 GRANT ALL PRIVILEGES ON addressbook.* TO addrbkuser@%;
 
-CREATE USER root@% IDENTIFIED BY 'P^55word*007';
-ALTER USER root@% IDENTIFIED WITH mysql_native_password BY 'P^55word*007';
+CREATE USER root@% IDENTIFIED WITH mysql_native_password BY 'P^55word*007';
+-- ALTER USER root@% IDENTIFIED WITH mysql_native_password BY 'P^55word*007';
 
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
+GRANT ALL PRIVILEGES ON *.* TO root@%;
