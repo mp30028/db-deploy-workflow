@@ -57,12 +57,12 @@ INSERT INTO `t_other_name` VALUES (1,'Toby',1,4),(2,'Johans',3,6),(3,'Tanck',3,7
 
 UNLOCK TABLES;
 
-DROP USER IF EXISTS addrbkuser@localhost;
-CREATE USER addrbkuser@% IDENTIFIED BY 'addr3ssb00k';
-ALTER USER addrbkuser@% IDENTIFIED WITH mysql_native_password BY 'addr3ssb00k';
-GRANT ALL PRIVILEGES ON addressbook.* TO addrbkuser@%;
+DROP USER IF EXISTS 'addrbkuser'@'%';
+CREATE USER 'addrbkuser'@'%' IDENTIFIED BY 'addr3ssb00k';
+-- ALTER USER 'addrbkuser'@'%' IDENTIFIED WITH mysql_native_password BY 'addr3ssb00k';
+GRANT ALL PRIVILEGES ON addressbook.* TO 'addrbkuser'@'%';
 
-CREATE USER root@% IDENTIFIED WITH mysql_native_password BY 'P^55word*007';
+CREATE USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'P^55word*007';
 -- ALTER USER root@% IDENTIFIED WITH mysql_native_password BY 'P^55word*007';
 
-GRANT ALL PRIVILEGES ON *.* TO root@%;
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
