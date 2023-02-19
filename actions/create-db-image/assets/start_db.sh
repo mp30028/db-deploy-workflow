@@ -44,6 +44,6 @@ docker build --no-cache --pull -t $image_name ./
 #docker run --rm --name $container_name -d -p 3306:3306 $image_name
 
 #Create a new container and start it up - 
-docker run --name $container_name -it -d -p 3307:3306 $image_name /bin/bash
+docker run --name $container_name -d -p 3307:3306 $image_name
 
 echo "NOTE THE DATABASE PORT IS 3307"
