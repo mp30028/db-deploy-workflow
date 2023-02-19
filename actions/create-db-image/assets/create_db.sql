@@ -59,10 +59,10 @@ UNLOCK TABLES;
 
 DROP USER IF EXISTS 'addrbkuser'@'%';
 CREATE USER 'addrbkuser'@'%' IDENTIFIED WITH mysql_native_password BY 'addr3ssb00k';
-GRANT ALL PRIVILEGES ON addressbook.* TO 'addrbkuser'@'%';
 ALTER USER 'addrbkuser'@'%' IDENTIFIED WITH mysql_native_password BY 'addr3ssb00k';
+GRANT ALL PRIVILEGES ON addressbook.* TO 'addrbkuser'@'%';
 
-
+DROP USER IF EXISTS 'root'@'%';
 CREATE USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'P^55word*007';
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
 ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'P^55word*007';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
