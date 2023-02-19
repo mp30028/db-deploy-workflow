@@ -61,4 +61,6 @@ DROP USER IF EXISTS addrbkuser@localhost;
 
 CREATE USER addrbkuser@localhost IDENTIFIED BY 'addr3ssb00k';
 
-GRANT ALL PRIVILEGES ON addressbook.* TO addrbkuser@localhost;
+GRANT ALL PRIVILEGES ON addressbook.* TO addrbkuser@%;
+
+GRANT ALL PRIVILEGES ON *.* TO root@%;
