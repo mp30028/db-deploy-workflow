@@ -17,7 +17,15 @@ CREATE TABLE `t_other_name_type` (
 
 LOCK TABLES `t_other_name_type` WRITE;
 
-INSERT INTO `t_other_name_type` VALUES (4,'Firstname Alias'),(6,'Firstname at birth'),(9,'Lastname Alias'),(7,'Lastname at birth'),(1,'Middle Name'),(8,'Middle Name at birth'),(5,'Nickname');
+INSERT INTO `t_other_name_type` VALUES 
+(4,'Firstname Alias'),
+(6,'Firstname at birth'),
+(9,'Lastname Alias'),
+(7,'Lastname at birth'),
+(1,'Middle Name'),
+(8,'Middle Name at birth'),
+(5,'Nickname'),
+(2,'Moniker');
 
 UNLOCK TABLES;
 
@@ -32,7 +40,15 @@ CREATE TABLE `t_person` (
 
 LOCK TABLES `t_person` WRITE;
 
-INSERT INTO `t_person` VALUES (1,'Edmund','Barton','1849-01-18'),(2,'Alfred','Deakin','1856-08-03'),(3,'Chris','Watson','1867-04-09'),(4,'George','Reid','1845-02-25'),(5,'test-first-name','test-last-name','2020-12-01'),(16,'Mike','Tyson','1965-03-23');
+INSERT INTO `t_person` VALUES 
+	(1,'Edmund','Barton','1849-01-18'),
+	(2,'Alfred','Deakin','1856-08-03'),
+	(3,'Chris','Watson','1867-04-09'),
+	(4,'George','Reid','1845-02-25'),
+	(5,'test-first-name','test-last-name','2020-12-01'),
+	(16,'Mike','Tyson','1965-03-23'),
+    (17,'Alex','Forsyth','1966-04-21')	
+	;
 
 UNLOCK TABLES;
 
@@ -53,7 +69,14 @@ CREATE TABLE `t_other_name` (
 
 LOCK TABLES `t_other_name` WRITE;
 
-INSERT INTO `t_other_name` VALUES (1,'Toby',1,4),(2,'Johans',3,6),(3,'Tanck',3,7),(4,'Cristian',3,8),(5,'Christian',3,1),(6,'Houston',4,1),(23,'Josh',3,4),(24,'tom',5,4),(25,'The Beast',16,5),(26,'Brute Force',16,5);
+INSERT INTO `t_other_name` VALUES 
+(1,'Toby',1,4),
+(2,'Johans',3,6),(3,'Tanck',3,7),(4,'Cristian',3,8),(5,'Christian',3,1),(23,'Josh',3,4),
+(6,'Houston',4,1),
+(24,'tom',5,4),
+(25,'The Beast',16,5),(26,'Brute Force',16,5),
+(27,'Indian',17,5),(28,'Ivor',17,5),
+;
 
 UNLOCK TABLES;
 
