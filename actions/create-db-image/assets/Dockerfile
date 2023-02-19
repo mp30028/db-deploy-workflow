@@ -6,6 +6,6 @@ ENV MYSQL_ROOT_PASSWORD P^55word*007
 ENV MYSQL_DATABASE addressbook
 ADD create_db.sql /docker-entrypoint-initdb.d
 EXPOSE 3306
-COPY start_db.sh /start_db.sh
-RUN chmod 0700 /start_db.sh
-ENTRYPOINT ["/start_db.sh"]
+# COPY start_db.sh /start_db.sh
+# RUN chmod 0700 /start_db.sh
+# ENTRYPOINT ["/start_db.sh"]
