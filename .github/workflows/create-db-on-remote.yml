@@ -18,18 +18,17 @@ env:
 jobs:
   push-create-db-assets-to-remote-job:
     runs-on: ubuntu-22.04
+    env:
+      repo_root_path: $GITHUB_WORKSPACE
 
       
     steps:
       # Checkout the repository this workflow belongs to using a ready made global action called checkout
       # The repository name is in an env variable called $GITHUB_WORKSPACE which this action uses 
       - uses: actions/checkout@v3
-        
-        
+                
       - name: Make staging directory
         run: mkdir ./${{ env.staging_folder }}
-        env:
-          repo_root_path: $GITHUB_WORKSPACE
         
       - name: Copy data to be transferred to staging
         run: cp -r ${{ env.repo_root_path }}/actions/create-db-image/assets/ ./${{ env.staging_folder }}
