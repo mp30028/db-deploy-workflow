@@ -4,24 +4,25 @@ name: Workflow to create a db running inside a docker container on a remote host
 # Controls when the workflow will run
 on:
 
-#  pull_request:
-#    branches: [ "main" ]
-#    types: [opened, synchronize , closed]
-  push:
-    branches:
-      - "devleop_workflow"    
+# to trigger only on merge. Merging closes the pull request but requires additional check
+# as a pull request could also be closed manually without a merge occurring.
+  pull_request:
+    branches: [ "main" ]
+    types: [closed]  
+ 
   workflow_dispatch:
 
 env:
-  staging_folder: staging #Must be consistent with folder used in Dockrfile
+  staging_folder: create-db-staging
   
 jobs:
-  push-create-db-assets-to-remote-job:
+  push-create-db-folder-to-remote-job:
+# Before running the job check a merge actually occurred.
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-22.04
-    env:
-      repo_root_path: $GITHUB_WORKSPACE
+#    env:
+#      repo_root_path: $GITHUB_WORKSPACE
 
-      
     steps:
       # Checkout the repository this workflow belongs to using a ready made global action called checkout
       # The repository name is in an env variable called $GITHUB_WORKSPACE which this action uses 
@@ -30,8 +31,13 @@ jobs:
       - name: Make staging directory
         run: mkdir ./${{ env.staging_folder }}
         
-      - name: Copy data to be transferred to staging
-        run: cp -r ${{ env.repo_root_path }}/actions/create-db-image/assets/ ./${{ env.staging_folder }}
+      - name: Copy assets from repository
+        run: cp $GITHUB_WORKSPACE/create-db-assets/* ./${{ env.staging_folder }}
+        #cp ./staging/assets/* ./tmp
+
+      - name: Copy configs from repository
+        run: cp -r $GITHUB_WORKSPACE/create-db-configs/* ./${{ env.staging_folder }}
+
       
       #  Check out the sftp-folder-to-remote action
       - uses: mp30028/wf-actions/actions/sftp-folder-to-remote@main
@@ -41,4 +47,18 @@ jobs:
           remote_port: ${{ secrets.REMOTE_PORT  }}
           remote_ssh_key: ${{ secrets.REMOTE_SSH_KEY  }}
           local_filepath: ./${{ env.staging_folder }} 
-          remote_filepath: ${{ vars.REMOTE_FILEPATH  }}          
+          remote_filepath: ${{ vars.REMOTE_FILEPATH  }}
+          
+  start-databases-job:
+    runs-on: ubuntu-22.04
+    needs: [push-create-db-folder-to-remote-job]
+    steps:
+      
+      #  Check out the sftp-folder-to-remote action
+      - uses: mp30028/wf-actions/actions/execute-remote-command@main
+        with:
+          remote_username: ${{ secrets.REMOTE_USERNAME  }}
+          remote_host: ${{ secrets.REMOTE_SERVER  }}
+          remote_port: ${{ secrets.REMOTE_PORT  }}
+          remote_ssh_key: ${{ secrets.REMOTE_SSH_KEY  }}
+          remote_cmd: cd ${{ vars.REMOTE_FILEPATH  }}/${{ env.staging_folder }}; bash ./build_and_start_all_dbs.sh    

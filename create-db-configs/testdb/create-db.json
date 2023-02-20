@@ -1,0 +1,9 @@
+{
+	"description": "First-Test-Instance to see if workflow is working",
+	"docker_image_name": "mp30028/testdb",
+	"docker_container_name": "testdb",
+	"db_port_number": 3307,
+	"db_password": "P^55word*007",
+	"db_name": "addressbook",
+	"db_sql_script_file": "create_db.sql"	
+}

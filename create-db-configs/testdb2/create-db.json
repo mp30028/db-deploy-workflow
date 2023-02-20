@@ -1,0 +1,9 @@
+{
+	"description": "Second-Test-Instance to double check multiple setups are not an issue",
+	"docker_image_name": "mp30028/testdb",
+	"docker_container_name": "testdb2",
+	"db_port_number": 3308,
+	"db_password": "P^55word*007",
+	"db_name": "addressbook",
+	"db_sql_script_file": "create_db.sql"	
+}
