@@ -4,14 +4,12 @@ name: Workflow to create a db running inside a docker container on a remote host
 # Controls when the workflow will run
 on:
 
+# to trigger only on merge. Merging closes the pull request but requires additional check
+# as a pull request could also be closed manually without a merge occurring.
   pull_request:
     branches: [ "main" ]
-    types: [opened, synchronize , closed]
-
-#  push:
-#    branches:
-#      - "devleop_workflow"    
-
+    types: [closed]  
+ 
   workflow_dispatch:
 
 env:
@@ -19,6 +17,8 @@ env:
   
 jobs:
   push-create-db-folder-to-remote-job:
+# Before running the job check a merge actually occurred.
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-22.04
 #    env:
 #      repo_root_path: $GITHUB_WORKSPACE
