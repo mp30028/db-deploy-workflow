@@ -31,7 +31,7 @@ jobs:
         run: mkdir ./${{ env.staging_folder }}
         
       - name: Copy data to be transferred to staging
-        run: cp -r ${{ env.github_workspace }}/create-db/ ./${{ env.staging_folder }}
+        run: cp -r $GITHUB_WORKSPACE/create-db/ ./${{ env.staging_folder }}
       
       #  Check out the sftp-folder-to-remote action
       - uses: mp30028/wf-actions/actions/sftp-folder-to-remote@main
