@@ -4,13 +4,14 @@ name: Workflow to create a db running inside a docker container on a remote host
 # Controls when the workflow will run
 on:
 
-#  pull_request:
-#    branches: [ "main" ]
-#    types: [opened, synchronize , closed]
+  pull_request:
+    branches: [ "main" ]
+    types: [opened, synchronize , closed]
 
 #  push:
 #    branches:
 #      - "devleop_workflow"    
+
   workflow_dispatch:
 
 env:
