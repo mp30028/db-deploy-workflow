@@ -1,0 +1,7 @@
+{
+	"db_instance_name": "testdb2",
+	"description": "test instance to see if workflow is working",
+	"docker_image":"mp30028/testdb:latest",
+	"docker_container":"testdb2",
+	"db_port":3308
+}
