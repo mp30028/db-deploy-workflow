@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 
 env:
-  staging_folder: staging
+  staging_folder: staging_test
   
 jobs:
   push-create-db-folder-to-remote-job:
@@ -31,8 +31,12 @@ jobs:
       - name: Make staging directory
         run: mkdir ./${{ env.staging_folder }}
         
-      - name: Copy data to be transferred to staging
-        run: cp -r $GITHUB_WORKSPACE/create-db/ ./${{ env.staging_folder }}
+      - name: Copy assets from repository
+        run: cp -r $GITHUB_WORKSPACE/create-db-assets/ ./${{ env.staging_folder }}
+
+      - name: Copy configs from repository
+        run: cp -r $GITHUB_WORKSPACE/create-db-configs/ ./${{ env.staging_folder }}
+
       
       #  Check out the sftp-folder-to-remote action
       - uses: mp30028/wf-actions/actions/sftp-folder-to-remote@main
