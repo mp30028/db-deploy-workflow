@@ -47,4 +47,18 @@ jobs:
           remote_port: ${{ secrets.REMOTE_PORT  }}
           remote_ssh_key: ${{ secrets.REMOTE_SSH_KEY  }}
           local_filepath: ./${{ env.staging_folder }} 
-          remote_filepath: ${{ vars.REMOTE_FILEPATH  }}          
+          remote_filepath: ${{ vars.REMOTE_FILEPATH  }}
+          
+  start-databases-job:
+    runs-on: ubuntu-22.04
+    needs: [push-create-db-folder-to-remote-job]
+    steps:
+      
+      #  Check out the sftp-folder-to-remote action
+      - uses: mp30028/wf-actions/actions/execute-remote-command@main
+        with:
+          remote_username: ${{ secrets.REMOTE_USERNAME  }}
+          remote_host: ${{ secrets.REMOTE_SERVER  }}
+          remote_port: ${{ secrets.REMOTE_PORT  }}
+          remote_ssh_key: ${{ secrets.REMOTE_SSH_KEY  }}
+          remote_cmd: cd ${{ vars.REMOTE_FILEPATH  }}/${{ env.staging_folder }}; bash ./build_and_start_all_dbs.sh    
