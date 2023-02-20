@@ -7,21 +7,21 @@ on:
 #  pull_request:
 #    branches: [ "main" ]
 #    types: [opened, synchronize , closed]
-  push:
-    branches:
-      - "devleop_workflow"    
+
+#  push:
+#    branches:
+#      - "devleop_workflow"    
   workflow_dispatch:
 
 env:
-  staging_folder: staging #Must be consistent with folder used in Dockrfile
+  staging_folder: staging
   
 jobs:
-  push-create-db-assets-to-remote-job:
+  push-create-db-folder-to-remote-job:
     runs-on: ubuntu-22.04
-    env:
-      repo_root_path: $GITHUB_WORKSPACE
+#    env:
+#      repo_root_path: $GITHUB_WORKSPACE
 
-      
     steps:
       # Checkout the repository this workflow belongs to using a ready made global action called checkout
       # The repository name is in an env variable called $GITHUB_WORKSPACE which this action uses 
@@ -31,7 +31,7 @@ jobs:
         run: mkdir ./${{ env.staging_folder }}
         
       - name: Copy data to be transferred to staging
-        run: cp -r ${{ env.repo_root_path }}/actions/create-db-image/assets/ ./${{ env.staging_folder }}
+        run: cp -r ${{ env.github_workspace }}/create-db/ ./${{ env.staging_folder }}
       
       #  Check out the sftp-folder-to-remote action
       - uses: mp30028/wf-actions/actions/sftp-folder-to-remote@main
