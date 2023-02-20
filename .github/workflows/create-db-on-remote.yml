@@ -32,10 +32,11 @@ jobs:
         run: mkdir ./${{ env.staging_folder }}
         
       - name: Copy assets from repository
-        run: cp -r $GITHUB_WORKSPACE/create-db-assets/ ./${{ env.staging_folder }}
+        run: cp $GITHUB_WORKSPACE/create-db-assets/* ./${{ env.staging_folder }}
+        #cp ./staging/assets/* ./tmp
 
       - name: Copy configs from repository
-        run: cp -r $GITHUB_WORKSPACE/create-db-configs/ ./${{ env.staging_folder }}
+        run: cp $GITHUB_WORKSPACE/create-db-configs/ ./${{ env.staging_folder }}
 
       
       #  Check out the sftp-folder-to-remote action
