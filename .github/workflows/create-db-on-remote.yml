@@ -18,7 +18,7 @@ env:
 jobs:
   push-create-db-folder-to-remote-job:
 # Before running the job check a merge actually occurred.
-    if: github.event.pull_request.merged == true
+    #if: github.event.pull_request.merged == true
     runs-on: ubuntu-22.04
 #    env:
 #      repo_root_path: $GITHUB_WORKSPACE
