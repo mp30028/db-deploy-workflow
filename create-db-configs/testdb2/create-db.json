@@ -1,7 +1,9 @@
 {
-	"db_instance_name": "testdb2",
-	"description": "test instance to see if workflow is working",
-	"docker_image":"mp30028/testdb:latest",
-	"docker_container":"testdb2",
-	"db_port":3308
+	"description": "Second-Test-Instance to double check multiple setups are not an issue",
+	"docker_image_name": "mp30028/testdb",
+	"docker_container_name": "testdb2",
+	"db_port_number": 3308,
+	"db_password": "P^55word*007",
+	"db_name": "addressbook",
+	"db_sql_script_file": "create_db.sql"	
 }
