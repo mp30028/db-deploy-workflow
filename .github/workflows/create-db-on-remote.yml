@@ -36,7 +36,7 @@ jobs:
         #cp ./staging/assets/* ./tmp
 
       - name: Copy configs from repository
-        run: cp $GITHUB_WORKSPACE/create-db-configs/* ./${{ env.staging_folder }}
+        run: cp -r $GITHUB_WORKSPACE/create-db-configs/* ./${{ env.staging_folder }}
 
       
       #  Check out the sftp-folder-to-remote action
